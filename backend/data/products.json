@@ -1,0 +1,132 @@
+[
+    {
+        "name":"weedakii",
+        "price": 900,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"weed",
+        "seller": "weed",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"Golden labtop",
+        "price": 100,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Labtop",
+        "seller": "ahmed",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"sexy lady",
+        "price": 400.5,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Ladies",
+        "seller": "emey",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"nike shoes",
+        "price": 45.5,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Shoes",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"t-chirt",
+        "price": 20,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Clothes",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"black watch",
+        "price": 300,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Watches",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"smart tv",
+        "price": 800,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+            "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        }],
+        "category":"Electronics",
+        "seller": "wireman",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name":"flower",
+        "price": 5,
+        "description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "ratings": 4.5,
+        "images": [
+            {
+                "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+                "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+            },
+            {
+                "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+                "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+            },
+            {
+                "public_id": "img/81fPKd-2AYL._AC_SL1500_",
+                "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+            }
+        ],
+        "category":"Fornuture",
+        "seller": "jasmine",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    }
+]
