@@ -1,6 +1,5 @@
 import app from "./app.js";
 import connectdb from "./config/db.js";
-import dotenv from "dotenv";
 
 process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.message}`);
@@ -10,10 +9,13 @@ process.on('uncaughtException', err => {
     });
 })
 // settent confing and connect database
-dotenv.config({path: 'backend/config/config.env'})
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config({path: 'backend/config/config.env'})
+}
 connectdb()
 
-const server = app.listen(5000, () => {
+
+const server = app.listen(process.env.PORT, () => {
     console.log(`server started at host: ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
 })
 // handle unhandled promis error
