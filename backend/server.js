@@ -4,9 +4,7 @@ import connectdb from "./config/db.js";
 process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.message}`);
     console.log('shutting down server due to uncaught Exception');
-    server.close(() => {
-        process.exit(1);
-    });
+    process.exit(1);
 })
 // settent confing and connect database
 if(process.env.NODE_ENV !== 'production'){
