@@ -1,7 +1,7 @@
 import express from "express";
 import { allUser, deleteUser, forgotPassword, getSingleUser, getUserProfile, loginUser, logout, registerUser, resetPassword, updatePassword, updateProfile, updateUser } from "../controller/authController.js";
 import { allOrders, createOrder, getOrder, myOrders, updateOrder, deleteOrder } from "../controller/orderController.js";
-import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getProductReview, getSingleProduct, updateProduct } from "../controller/productController.js";
+import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getAllProductsForFlutter, getProductReview, getSingleProduct, updateProduct } from "../controller/productController.js";
 import { authorizeRole, isAuthenticated } from "../middlewares/auth.js";
 import { createCarousel, getCarousel, getCategory, updateCarousel } from '../controller/categoryCotroller.js';
 const router = express.Router()
@@ -12,6 +12,7 @@ router.route('/new/carousel').post(createCarousel)
 router.route('/carousel/:id').put(updateCarousel)
 // products
 router.route('/products').get(getAllProducts)
+router.route('/flutterproducts').get(getAllProductsForFlutter)
 router.route('/product/:id').get(getSingleProduct)
 router.route('/admin/product/new').post(isAuthenticated, authorizeRole('admin'),createProduct)
 router.route('/admin/product/:id')

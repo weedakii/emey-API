@@ -3,6 +3,36 @@ import ErrHandler from '../utils/errHandler.js'
 import catchAsyncErr from '../middlewares/catchAsyncErr.js'
 import APIFeatures from '../utils/APIFeatures.js'
 
+// get all products forflutter
+export const getAllProductsForFlutter = catchAsyncErr(async (req, res, next) => {
+    const productCount = await Product.countDocuments()
+
+    const apiFeatures = new APIFeatures(Product.find(), req.query)
+    .search().filter()
+
+    const products = await apiFeatures.query
+
+    const carousel = [
+        {
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1640540082/samples/ecommerce/shoes.png',
+            name: 'shoes'
+        },
+        {
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1640540086/samples/ecommerce/leather-bag-gray.jpg',
+            name: 'leather-bag-gray'
+        },
+        {
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1640540078/samples/ecommerce/analog-classic.jpg',
+            name: 'analog-classic'
+        },
+    ]
+
+    res.status(200).json({
+        success: true,
+        carousel,
+        products
+    })
+})
 // get all products
 export const getAllProducts = catchAsyncErr(async (req, res, next) => {
     const resPerPage = 4;
