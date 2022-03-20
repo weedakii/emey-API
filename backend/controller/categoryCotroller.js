@@ -1,18 +1,20 @@
 import Carusel from '../models/carosalModel.js'
+import Category from '../models/categoryModel.js'
 import catchAsyncErr from "../middlewares/catchAsyncErr.js"
 import ErrorHandler from "../utils/errHandler.js"
 // get Category
 export const getCategory = catchAsyncErr(async (req, res, next) => {
-    const category = [
-        "weed",
-        "Labtop",
-        "Ladies",
-        "Shoes",
-        "Clothes",
-        "Watches",
-        "Electronics",
-        "Forneture"
-    ]
+    
+    const category = await Category.find()
+
+    res.status(200).json({
+        success: true,
+        category
+    })
+})
+export const createCategory = catchAsyncErr(async (req, res, next) => {
+    
+    const category = await Category.create(req.body)
 
     res.status(200).json({
         success: true,

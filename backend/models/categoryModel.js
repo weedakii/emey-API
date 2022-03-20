@@ -1,17 +1,14 @@
 import mongoose from 'mongoose'
 
 const categorySchema = new mongoose.Schema({
-        category: [
-            "weed",
-            "Labtop",
-            "Ladies",
-            "Shoes",
-            "Clothes",
-            "Watches",
-            "Electronics",
-            "Forneture"
-        ]
-    
+    name: {
+        type: String,
+        required: true,
+    },
+    image_url: {
+        type: String,
+        required: true,
+    },
 })
 
 export default mongoose.model('Category', categorySchema)
