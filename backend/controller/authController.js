@@ -7,8 +7,8 @@ import crypto from 'crypto'
 import cloudinary from "cloudinary"
 import {OAuth2Client}from 'google-auth-library';
 import mailgun from "mailgun-js";
-const DOMAIN = 'sandboxc415a02114654f71bf53e6871f61bc0e.mailgun.org';
-const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN});
+// const DOMAIN = 'sandboxc415a02114654f71bf53e6871f61bc0e.mailgun.org';
+// const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN});
 const client = new OAuth2Client("14928484089-aq5ckopm9jf0eu8ricjapu1nin9fdami.apps.googleusercontent.com")
 
 
@@ -91,67 +91,67 @@ export const googleLogin = catchAsyncErr(async (req, res, next) => {
     })
 })
 // forgot password
-export const forgotPassword = catchAsyncErr(async (req, res, next) => {
-    const user = await User.findOne({ email: req.body.email })
-    if (!user) {
-        return next(new ErrorHandler('User not found with this email', 404))
-    }
+// export const forgotPassword = catchAsyncErr(async (req, res, next) => {
+//     const user = await User.findOne({ email: req.body.email })
+//     if (!user) {
+//         return next(new ErrorHandler('User not found with this email', 404))
+//     }
 
-    const resetToken = user.getResetPasswordToken()
-    await user.save({ validateBeforeSave: false })
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
-    const message = `Your password reset token is as follow:<br><br>(<a href='${resetUrl}'>${resetUrl}</a>)<br><br>If you have not requested this email, then ignore it`;
+//     const resetToken = user.getResetPasswordToken()
+//     await user.save({ validateBeforeSave: false })
+//     const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+//     const message = `Your password reset token is as follow:<br><br>(<a href='${resetUrl}'>${resetUrl}</a>)<br><br>If you have not requested this email, then ignore it`;
 
-    const data = {
-        from: 'Tsouq <reactweed@gmail.com>',
-        to: user.email,
-        subject: 'Tsouq password recovery',
-        html: message
-    };
+//     const data = {
+//         from: 'Tsouq <reactweed@gmail.com>',
+//         to: user.email,
+//         subject: 'Tsouq password recovery',
+//         html: message
+//     };
 
-    try {
-        mg.messages().send(data, function (error, body) {
-            console.log(body);
-        });
+//     try {
+//         mg.messages().send(data, function (error, body) {
+//             console.log(body);
+//         });
 
-        res.status(200).json({
-            success: true,
-            message: `Email send to: ${user.email}`
-        })
-    } catch (error) {
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpire = undefined;
+//         res.status(200).json({
+//             success: true,
+//             message: `Email send to: ${user.email}`
+//         })
+//     } catch (error) {
+//         user.resetPasswordToken = undefined;
+//         user.resetPasswordExpire = undefined;
 
-        await user.save({ validateBeforeSave: false })
+//         await user.save({ validateBeforeSave: false })
 
-        return next(new ErrorHandler(error.message, 500))
-    }
-})
-// reset password
-export const resetPassword = catchAsyncErr(async (req, res, next) => {
-    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
+//         return next(new ErrorHandler(error.message, 500))
+//     }
+// })
+// // reset password
+// export const resetPassword = catchAsyncErr(async (req, res, next) => {
+//     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
 
-    const user = await User.findOne({
-        resetPasswordToken,
-        resetPasswordExpire: { $gt: Date.now() }
-    })
+//     const user = await User.findOne({
+//         resetPasswordToken,
+//         resetPasswordExpire: { $gt: Date.now() }
+//     })
 
-    if (!user) {
-        return next(new ErrHandler('password reset token is invalid or has been expired', 400))
-    }
+//     if (!user) {
+//         return next(new ErrHandler('password reset token is invalid or has been expired', 400))
+//     }
 
-    if (req.body.password !== req.body.confirmPassword) {
-        return next(new ErrHandler('password does not match confirm password', 400))
-    }
+//     if (req.body.password !== req.body.confirmPassword) {
+//         return next(new ErrHandler('password does not match confirm password', 400))
+//     }
 
-    user.password = req.body.password
-    user.resetPasswordToken = undefined
-    user.resetPasswordExpire = undefined
+//     user.password = req.body.password
+//     user.resetPasswordToken = undefined
+//     user.resetPasswordExpire = undefined
 
-    await user.save()
+//     await user.save()
 
-    sendToken(user, 200, res)
-})
+//     sendToken(user, 200, res)
+// })
 // get currently logged in user details
 export const getUserProfile = catchAsyncErr(async (req, res, next) => {
     const user = await User.findById(req.user.id)
