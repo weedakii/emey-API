@@ -1,5 +1,6 @@
 import app from "./app.js";
 import connectdb from "./config/db.js";
+import dotenv from 'dotenv'
 
 process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.message}`);
@@ -8,7 +9,7 @@ process.on('uncaughtException', err => {
 })
 // settent confing and connect database
 if(process.env.NODE_ENV !== 'PRODUCTION'){
-    require('dotenv').config({path: 'backend/config/config.env'})
+    dotenv.config({path: 'backend/config/config.env'})
 }
 connectdb()
 
