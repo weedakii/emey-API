@@ -6,9 +6,6 @@ import sendEmail from '../utils/sendEmail.js'
 import crypto from 'crypto'
 import cloudinary from "cloudinary"
 import {OAuth2Client}from 'google-auth-library';
-import mailgun from "mailgun-js";
-// const DOMAIN = 'sandboxc415a02114654f71bf53e6871f61bc0e.mailgun.org';
-// const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN});
 const client = new OAuth2Client("14928484089-aq5ckopm9jf0eu8ricjapu1nin9fdami.apps.googleusercontent.com")
 
 
