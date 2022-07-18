@@ -2,11 +2,7 @@ import mongoose from 'mongoose'
 
 const orderSchema = new mongoose.Schema({
     shippingInfo: {
-        address: {
-            type: String,
-            required: true
-        },
-        city: {
+        name: {
             type: String,
             required: true
         },
@@ -14,19 +10,19 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        postalCode: {
+        state: {
             type: String,
             required: true
         },
-        country: {
+        address: {
             type: String,
             required: true
         },
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        required: true,
+        ref: 'User'
     },
     orderItems: [
         {
@@ -35,10 +31,6 @@ const orderSchema = new mongoose.Schema({
                 required: true
             },
             quantity: {
-                type: Number,
-                required: true
-            },
-            image: {
                 type: String,
                 required: true
             },
@@ -46,30 +38,18 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
+            image: {
+                type: String,
+                required: true
+            },
             product: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product',
-                required: true
+                required: true,
+                ref: 'Product'
             },
         }
     ],
-    paymentInfo: {
-        id: {
-            type: String,
-        },
-        status: {
-            type: String,
-        }
-    },
-    paidAt: {
-        type: Date
-    },
     itemsPrice: {
-        type: Number,
-        required: true,
-        default: 0.0
-    },
-    taxPrice: {
         type: Number,
         required: true,
         default: 0.0
@@ -87,10 +67,13 @@ const orderSchema = new mongoose.Schema({
     orderStatus: {
         type: String,
         required: true,
-        default: 'Processing'
+        default: 'processing'
+    },
+    paidAt: {
+        type: Date
     },
     deliveredAt: {
-        type: Date,
+        type: Date
     },
     createdAt: {
         type: Date,

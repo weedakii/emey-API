@@ -4,6 +4,13 @@ import catchAsyncErr from '../middlewares/catchAsyncErr.js'
 import sendToken from '../utils/jwtToken.js'
 import sendEmail from '../utils/sendEmail.js'
 import crypto from 'crypto'
+import cloudinary from "cloudinary"
+import {OAuth2Client}from 'google-auth-library';
+import mailgun from "mailgun-js";
+const DOMAIN = 'sandboxc415a02114654f71bf53e6871f61bc0e.mailgun.org';
+const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN});
+const client = new OAuth2Client("14928484089-aq5ckopm9jf0eu8ricjapu1nin9fdami.apps.googleusercontent.com")
+
 
 // register
 export const registerUser = catchAsyncErr(async (req, res, next) => {
@@ -40,38 +47,84 @@ export const loginUser = catchAsyncErr(async (req, res, next) => {
     }
     sendToken(user, 200, res)
 })
+// login with google
+export const googleLogin = catchAsyncErr(async (req, res, next) => {
+    const {tokenId} = req.body
+    
+    client.verifyIdToken({
+        idToken: tokenId, 
+        audience: "14928484089-aq5ckopm9jf0eu8ricjapu1nin9fdami.apps.googleusercontent.com"
+    }).then(response => {
+        const {email_verified, name, email, picture} = response.payload
+        if (email_verified) {
+            User.findOne({email}).exec(async (err, user) => {
+                if (err) {
+                    return next(new ErrorHandler('Something went wronge...', 400))
+                } else {
+                    if (user) {
+                        console.log("555");
+                        sendToken(user, 200, res)
+                    } else {
+                        console.log("444");
+                        const myCloud = await cloudinary.v2.uploader.upload(picture, {
+                            folder: 'avatar',
+                            with: 150,
+                            crop: "scale",
+                        })
+                        let password = email
+                        let newUser = new User({
+                            name,
+                            email,
+                            password,
+                            avatar: {
+                                public_id: myCloud.public_id,
+                                url: myCloud.secure_url
+                            }
+                        });
+                        newUser.save()
+                        console.log(newUser);
+                        sendToken(newUser, 201, res)
+                    }
+                }
+            })
+        }
+    })
+})
 // forgot password
 export const forgotPassword = catchAsyncErr(async (req, res, next) => {
-    const user = await User.findOne({email: req.body.email})
-    if(!user) {
-        return next(new ErrHandler('there is no user with this email', 404))
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) {
+        return next(new ErrorHandler('User not found with this email', 404))
     }
 
-    // reset token
-    const resetToken = user.getResetPasswordToken();
+    const resetToken = user.getResetPasswordToken()
     await user.save({ validateBeforeSave: false })
-    // create reset password url
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const message = `Your password reset token is as follow:<br><br>(<a href='${resetUrl}'>${resetUrl}</a>)<br><br>If you have not requested this email, then ignore it`;
 
-    const messagee = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`
+    const data = {
+        from: 'Tsouq <reactweed@gmail.com>',
+        to: user.email,
+        subject: 'Tsouq password recovery',
+        html: message
+    };
 
     try {
-        await sendEmail({
-            email: user.email,
-            subject: 'emey password recovery',
-            messagee
-        })
-        
+        mg.messages().send(data, function (error, body) {
+            console.log(body);
+        });
+
         res.status(200).json({
             success: true,
-            message: `Email send to ${user.email}`
+            message: `Email send to: ${user.email}`
         })
-    } catch (err) {
-        user.resetPasswordToken = undefined
-        user.resetPasswordExpire = undefined
+    } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
 
         await user.save({ validateBeforeSave: false })
-        return next(new ErrHandler(err.message, 500))
+
+        return next(new ErrorHandler(error.message, 500))
     }
 })
 // reset password
@@ -128,7 +181,26 @@ export const updatePassword = catchAsyncErr(async (req, res, next) => {
 export const updateProfile = catchAsyncErr(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
-        email: req.body.email
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phoneNo: req.body.phoneNo,
+        address: req.body.address,
+    }
+
+    if (req.body.avatar !== '') {
+        const us = await User.findById(req.user.id)
+        const imgId = us.avatar.public_id
+
+        await cloudinary.v2.uploader.destroy(imgId)
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: 'avatar',
+            with: 150,
+            crop: "scale",
+        })
+        newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
+        }
     }
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
@@ -154,6 +226,7 @@ export const logout = catchAsyncErr(async (req, res, next) => {
     })
 })
 // admin routes
+
 // get all users
 export const allUser = catchAsyncErr(async (req, res, next) => {
     const users = await User.find()

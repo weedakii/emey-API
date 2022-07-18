@@ -1,5 +1,5 @@
 import express from "express";
-import { allUser, deleteUser, forgotPassword, getSingleUser, getUserProfile, loginUser, logout, registerUser, resetPassword, updatePassword, updateProfile, updateUser } from "../controller/authController.js";
+import { allUser, deleteUser, forgotPassword, getSingleUser, getUserProfile, googleLogin, loginUser, logout, registerUser, resetPassword, updatePassword, updateProfile, updateUser } from "../controller/authController.js";
 import { allOrders, createOrder, getOrder, myOrders, updateOrder, deleteOrder } from "../controller/orderController.js";
 import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getAllProductsForFlutter, getProductReview, getSingleProduct, updateProduct } from "../controller/productController.js";
 import { authorizeRole, isAuthenticated } from "../middlewares/auth.js";
@@ -27,6 +27,7 @@ router.route('/reviews')
 // auth
 router.route('/register').post(registerUser)
 router.route('/login').post(loginUser)
+router.route('/googleLogin').post(googleLogin)
 router.route('/password/forgot').post(forgotPassword)
 router.route('/password/reset/:token').put(resetPassword)
 router.route('/logout').get(logout)

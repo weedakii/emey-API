@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
+    index: {
+        type: Number,
+        required: true,
+    },
     name: {
         type: String,
         required: [true, 'plz enter product name'],
@@ -38,14 +42,15 @@ const productSchema = new mongoose.Schema({
         required: [true, 'plz select product category'],
         enum: {
             values: [
-                "weed",
-                "Labtop",
-                "Ladies",
-                "Shoes",
-                "Clothes",
-                "Watches",
-                "Electronics",
-                "Fornuture",
+                'Electronics',
+                'Cameras',
+                'Laptops',
+                'Ladies',
+                'Food',
+                'Books',
+                'Clothes',
+                'Shoes',
+                'Sports'
             ],
             message: 'plz select corect category'
         }
