@@ -1,7 +1,8 @@
 import ErrorHandler from "../utils/errHandler.js";
+import dotenv from 'dotenv'
 
 if(process.env.NODE_ENV !== 'PRODUCTION'){
-    require('dotenv').config({path: 'backend/config/config.env'})
+    dotenv.config({path: 'backend/config/config.env'})
 }
 
 export default (err, req, res, next) => {
