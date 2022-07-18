@@ -11,6 +11,15 @@ const productSchema = new mongoose.Schema({
         trim: true,
         maxlength: [100, 'plz make sure that the lenth is maximum 100 character']
     },
+    info: {
+        type: String,
+        required: [true, 'plz enter product info'],
+    },
+    type: {
+        type: String,
+        required: true,
+        default: 'new'
+    },
     price: {
         type: Number,
         required: [true, 'plz enter product price'],
