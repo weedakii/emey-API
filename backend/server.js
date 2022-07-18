@@ -15,8 +15,8 @@ connectdb()
 
 let port = process.env.PORT || 4000
 
-const server = app.listen(process.env.PORT, () => {
-    console.log(`server started at host: ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+const server = app.listen(port, () => {
+    console.log(`server started at host: ${port} in ${process.env.NODE_ENV} mode`);
 })
 // handle unhandled promis error
 process.on('unhandledRejection', err => {
