@@ -13,6 +13,7 @@ if(process.env.NODE_ENV !== 'PRODUCTION'){
 }
 connectdb()
 
+let port = process.env.PORT || 4000
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`server started at host: ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
