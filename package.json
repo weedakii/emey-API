@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "first full ecommerce using mern",
   "engines": {
-    "node": "14.20.0"
+    "node": "14.x"
   },
   "main": "backend/server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "node backend/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false",
     "seed": "node --experimental-json-modules backend/utils/seeder.js",
     "dev": "nodemon backend/server.js"
