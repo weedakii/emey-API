@@ -4,6 +4,9 @@ import { allOrders, createOrder, getOrder, myOrders, updateOrder, deleteOrder } 
 import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getAllProductsForFlutter, getProductReview, getSingleProduct, updateProduct } from "../controller/productController.js";
 import { authorizeRole, isAuthenticated } from "../middlewares/auth.js";
 import { createCarousel, createCategory, getCarousel, getCategory, updateCarousel } from '../controller/categoryCotroller.js';
+import { createFavourite, deleteFavourite, getAllFavourite } from '../controller/favouriteController.js';
+
+
 const router = express.Router()
 // category and carusel routes
 router.route('/category').get(getCategory)
@@ -11,6 +14,10 @@ router.route('/category/new').post(createCategory)
 router.route('/carousel').get(getCarousel)
 router.route('/new/carousel').post(createCarousel)
 router.route('/carousel/:id').put(updateCarousel)
+// favourite routes
+router.route('/favourite').get(isAuthenticated ,getAllFavourite)
+router.route('/favourite/new').post(isAuthenticated ,createFavourite)
+router.route('/favourite/:id').delete(isAuthenticated ,deleteFavourite)
 // products
 router.route('/products').get(getAllProducts)
 router.route('/flutterproducts').get(getAllProductsForFlutter)
