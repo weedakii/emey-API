@@ -14,16 +14,16 @@ export const getAllProductsForFlutter = catchAsyncErr(async (req, res, next) => 
 
     const carousel = [
         {
-            url: 'https://res.cloudinary.com/weedakii/image/upload/v1648115941/samples/ecommerce/caro-1_dkya3k.jpg',
-            name: 'shoes'
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1659388906/images/c1_vqlnax.jpg',
+            name: 'c1'
         },
         {
-            url: 'https://res.cloudinary.com/weedakii/image/upload/v1648115941/samples/ecommerce/caro-3_ycplrt.jpg',
-            name: 'leather-bag-gray'
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1659388909/images/c2_imtvcb.jpg',
+            name: 'c2'
         },
         {
-            url: 'https://res.cloudinary.com/weedakii/image/upload/v1648115942/samples/ecommerce/caro-2_qgifna.jpg',
-            name: 'analog-classic'
+            url: 'https://res.cloudinary.com/weedakii/image/upload/v1659388906/images/c1_vqlnax.jpg',
+            name: 'c3'
         },
     ]
 
