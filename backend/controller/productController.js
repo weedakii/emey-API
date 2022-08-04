@@ -2,6 +2,7 @@ import Product from '../models/productModel.js'
 import ErrHandler from '../utils/errHandler.js'
 import catchAsyncErr from '../middlewares/catchAsyncErr.js'
 import APIFeatures from '../utils/APIFeatures.js'
+import Carosal from '../models/carosalModel.js'
 
 // home page products
 export const homeProducts = catchAsyncErr(async (req, res, next) => {
