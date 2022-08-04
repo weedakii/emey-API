@@ -33,4 +33,5 @@ const favouriteSchema = new mongoose.Schema({
     }
 })
 
+
 export default mongoose.model('Favourite', favouriteSchema)

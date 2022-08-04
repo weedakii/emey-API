@@ -7,6 +7,7 @@ import { createCarousel, createCategory, getCarousel, getCategory, updateCarouse
 import { createFavourite, deleteFavourite, getAllFavourite } from '../controller/favouriteController.js';
 
 
+
 const router = express.Router()
 // category and carusel routes
 router.route('/category').get(getCategory)

@@ -2,6 +2,8 @@ import ErrorHandler from '../utils/errHandler.js'
 import catchAsyncErr from '../middlewares/catchAsyncErr.js'
 import Favourites from '../models/favouriteModel.js'
 
+
+
 // get all favourites
 export const getAllFavourite = catchAsyncErr(async (req, res, next) => {
     
