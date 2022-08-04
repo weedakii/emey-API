@@ -4,6 +4,7 @@ import Favourites from '../models/favouriteModel.js'
 
 // get all favourites
 export const getAllFavourite = catchAsyncErr(async (req, res, next) => {
+    
     const favourites = await Favourites.find({user: req.user.id})
 
     res.status(200).json({
