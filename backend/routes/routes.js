@@ -1,7 +1,7 @@
 import express from "express";
 import { allUser, deleteUser, getSingleUser, getUserProfile, googleLogin, loginUser, logout, registerUser, updatePassword, updateProfile, updateUser } from "../controller/authController.js";
 import { allOrders, createOrder, getOrder, myOrders, updateOrder, deleteOrder } from "../controller/orderController.js";
-import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getAllProductsForFlutter, getProductReview, getSingleProduct, updateProduct } from "../controller/productController.js";
+import { createProduct, createReview, deleteProduct, deleteProductReview, getAllProducts, getAllProductsForFlutter, getProductReview, getSingleProduct, homeProducts, updateProduct } from "../controller/productController.js";
 import { authorizeRole, isAuthenticated } from "../middlewares/auth.js";
 import { createCarousel, createCategory, getCarousel, getCategory, updateCarousel } from '../controller/categoryCotroller.js';
 import { createFavourite, deleteFavourite, getAllFavourite } from '../controller/favouriteController.js';
@@ -19,6 +19,7 @@ router.route('/favourite').get(isAuthenticated ,getAllFavourite)
 router.route('/favourite/new').post(isAuthenticated ,createFavourite)
 router.route('/favourite/:id').delete(isAuthenticated ,deleteFavourite)
 // products
+router.route('/home').get(homeProducts)
 router.route('/products').get(getAllProducts)
 router.route('/flutterproducts').get(getAllProductsForFlutter)
 router.route('/product/:id').get(getSingleProduct)

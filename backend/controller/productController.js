@@ -3,6 +3,28 @@ import ErrHandler from '../utils/errHandler.js'
 import catchAsyncErr from '../middlewares/catchAsyncErr.js'
 import APIFeatures from '../utils/APIFeatures.js'
 
+// home page products
+export const homeProducts = catchAsyncErr(async (req, res, next) => {
+    const carousel = await Carosal.find()
+    const resPerPage = 10
+    let topRated = new APIFeatures(Product.find({type: "top rated"}), req.query)
+    let hot = new APIFeatures(Product.find({type: "hot"}), req.query)
+    let newest = new APIFeatures(Product.find({type: "new"}), req.query)
+
+    const topRatedProducts = await topRated.query.clone()
+    const hotProducts = await hot.query.clone()
+    const newestProducts = await newest.query.clone()
+
+    res.status(200).json({
+        success: true,
+        products: {
+            carousel,
+            topRatedProducts,
+            hotProducts,
+            newestProducts
+        }
+    })
+})
 // get all products forflutter
 export const getAllProductsForFlutter = catchAsyncErr(async (req, res, next) => {
     const productCount = await Product.countDocuments()
