@@ -20,6 +20,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         default: 'new'
     },
+    oldPrice: {
+        type: Number,
+        maxlength: [5, 'plz make sure that the lenth is maximum 5 numbers'],
+    },
     price: {
         type: Number,
         required: [true, 'plz enter product price'],
