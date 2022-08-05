@@ -7,7 +7,7 @@ import Carosal from '../models/carosalModel.js'
 // home page products
 export const homeProducts = catchAsyncErr(async (req, res, next) => {
     const carousel = await Carosal.find()
-    const resPerPage = 10
+    const allProducts = await Product.find()
     let topRated = new APIFeatures(Product.find({type: "top rated"}), req.query)
     let hot = new APIFeatures(Product.find({type: "hot"}), req.query)
     let newest = new APIFeatures(Product.find({type: "new"}), req.query)
@@ -19,6 +19,7 @@ export const homeProducts = catchAsyncErr(async (req, res, next) => {
     res.status(200).json({
         success: true,
         products: {
+            allProducts,
             carousel,
             topRatedProducts,
             hotProducts,
