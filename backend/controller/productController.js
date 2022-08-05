@@ -7,11 +7,13 @@ import Carosal from '../models/carosalModel.js'
 // home page products
 export const homeProducts = catchAsyncErr(async (req, res, next) => {
     const carousel = await Carosal.find()
-    const allProducts = await Product.find()
-    let topRated = new APIFeatures(Product.find({type: "top rated"}), req.query)
-    let hot = new APIFeatures(Product.find({type: "hot"}), req.query)
-    let newest = new APIFeatures(Product.find({type: "new"}), req.query)
+    let all = new APIFeatures(Product.find(), req.query)
+    .search().filter()
+    let topRated = new APIFeatures(Product.find({type: "top rated"}), req.query).search().filter()
+    let hot = new APIFeatures(Product.find({type: "hot"}), req.query).search().filter()
+    let newest = new APIFeatures(Product.find({type: "new"}), req.query).search().filter()
 
+    const allProducts = await all.query.clone()
     const topRatedProducts = await topRated.query.clone()
     const hotProducts = await hot.query.clone()
     const newestProducts = await newest.query.clone()
