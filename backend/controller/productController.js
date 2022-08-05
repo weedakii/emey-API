@@ -92,6 +92,8 @@ export const getSingleProduct = catchAsyncErr(async (req, res, next) => {
 export const createProduct = catchAsyncErr(async (req, res, next) => {
     
     req.body.user = req.user.id;
+    req.body.oldPrice = req.body.price;
+    req.body.index = await Product.countDocuments()
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -105,6 +107,10 @@ export const updateProduct = catchAsyncErr(async (req, res, next) => {
     
     if (!product) {
         return next(new ErrHandler('Product not found', 404))
+    }
+    if (req.body.oldPrice) {
+        let dis = ((req.body.oldPrice - req.body.price) / req.body.oldPrice * 100)
+        req.body.discount = dis
     }
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
