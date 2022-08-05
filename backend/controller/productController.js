@@ -110,7 +110,7 @@ export const updateProduct = catchAsyncErr(async (req, res, next) => {
     }
     if (req.body.oldPrice) {
         let dis = ((req.body.oldPrice - req.body.price) / req.body.oldPrice * 100)
-        req.body.discount = dis
+        req.body.discount = Math.round(dis)
     }
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
