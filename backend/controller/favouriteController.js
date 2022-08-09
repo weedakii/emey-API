@@ -21,7 +21,7 @@ export const createFavourite = catchAsyncErr(async (req, res, next) => {
         return next(new ErrorHandler('Product is Already In', 401))
     }
     
-    req.body.user = req.user.id
+    req.body.by = req.user.id
     const favourite = await Favourites.create(req.body)
 
     res.status(200).json({
