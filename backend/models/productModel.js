@@ -5,6 +5,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    views: {
+        type: Number,
+        default: 0
+    },
     name: {
         type: String,
         required: [true, 'plz enter product name'],

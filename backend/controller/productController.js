@@ -7,8 +7,7 @@ import Carosal from '../models/carosalModel.js'
 // home page products
 export const homeProducts = catchAsyncErr(async (req, res, next) => {
     const carousel = await Carosal.find()
-    let all = new APIFeatures(Product.find(), req.query)
-    .search().filter()
+    let all = new APIFeatures(Product.find(), req.query).search().filter()
     let topRated = new APIFeatures(Product.find({type: "top rated"}), req.query).search().filter()
     let hot = new APIFeatures(Product.find({type: "hot"}), req.query).search().filter()
     let newest = new APIFeatures(Product.find({type: "new"}), req.query).search().filter()
@@ -84,6 +83,9 @@ export const getSingleProduct = catchAsyncErr(async (req, res, next) => {
     if (!product) {
         return next(new ErrHandler('Product not found', 404))
     }
+
+    product.views += 1;
+    product.save()
 
     res.status(200).json({
         success: true,
