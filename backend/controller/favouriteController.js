@@ -21,10 +21,12 @@ export const createFavourite = catchAsyncErr(async (req, res, next) => {
         return next(new ErrorHandler('Product is Already In', 401))
     }
     
-    const product = await Products.findById(req.body.product)
+    let product = await Products.findById(req.body.product)
     if (!product) {
         return next(new ErrorHandler('Product Not found', 401))
     }
+
+    delete product._doc._id
     let newProd = {by: req.user.id, product: req.body.product}
     newProd = {...product._doc, ...newProd}
     console.log(newProd);

@@ -61,10 +61,11 @@ const favouriteSchema = new mongoose.Schema({
     },
     product: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
         required: true,
     },
     user: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
@@ -73,7 +74,7 @@ const favouriteSchema = new mongoose.Schema({
         required: true,
     },
     by: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
