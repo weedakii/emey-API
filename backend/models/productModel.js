@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        default: 'new'
+        default: 'original'
     },
     oldPrice: {
         type: Number,
