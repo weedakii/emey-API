@@ -8,7 +8,7 @@ process.on('uncaughtException', err => {
     process.exit(1);
 })
 // settent confing and connect database
-if(process.env.NODE_ENV !== 'PRODUCTION'){
+if(process.env.NODE_ENV !== 'production'){
     dotenv.config({path: 'backend/config/config.env'})
 }
 connectdb()
