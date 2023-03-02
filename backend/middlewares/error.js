@@ -1,7 +1,7 @@
 import ErrorHandler from "../utils/errHandler.js";
 import dotenv from 'dotenv'
 
-if(process.env.NODE_ENV !== 'PRODUCTION'){
+if(process.env.NODE_ENV !== 'production'){
     dotenv.config({path: 'backend/config/config.env'})
 }
 
@@ -9,7 +9,7 @@ export default (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     
 
-    if (process.env.NODE_ENV === 'DEVELOPMENT') {
+    if (process.env.NODE_ENV === 'developement') {
         res.status(err.statusCode).json({
             success: false,
             error: err, 
@@ -18,7 +18,7 @@ export default (err, req, res, next) => {
         })
     }
 
-    if (process.env.NODE_ENV === 'PRODUCTION') {
+    if (process.env.NODE_ENV === 'production') {
         let error = {...err}
         error.message = err.message
         // Wrong mongoose object id error
